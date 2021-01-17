@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+    license_server:
+        image: webdevops/php-nginx:7.4 
+        container_name: license_server
+        volumes:
+            - ./src:/app
+            - ./license.conf:/opt/docker/etc/nginx/conf.d/license.conf
+        networks:
+            - local_net
+    license_db:
+        container_name: license_db
+        image: mariadb:10.5
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+        volumes:
+            - license_db:/var/lib/mysql
+        networks:
+            - local_net
+
+    phpmyadmin:
+        container_name: dbadmin
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 9916:80
+        environment:
+            PMA_HOST: license_db
+            PMA_PORT: 3306
+            PMA_USER: root
+            PMA_PASSWORD: root
+        networks:
+            - local_net
+
+volumes:
+    license_db:
+
+networks:
+    local_net:
+        external: true
