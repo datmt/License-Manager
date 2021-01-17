@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class Product extends Model
 {
     protected $fillable = [
-        'name', 'description', 'machine_count', 'price', 'landing_page_url', 'add_time'
+        'name', 'description', 'machine_count', 'price', 'landing_page_url', 'add_time', 'paypal_product_id'
     ];
     public $timestamps = false;
 

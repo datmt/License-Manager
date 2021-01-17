@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->unique();
+            $table->string('paypal_product_id', 255)->unique();
             $table->string('description', 255);
             $table->integer('machine_count'); //number of machine per license
             $table->integer('price');
